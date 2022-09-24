@@ -8,6 +8,7 @@ use Auth;
 
 class ContentController extends Controller
 {
+
     public function addContent(Request $request) {
         $this->validate($request,[
             'content'=>'required',
@@ -24,4 +25,15 @@ class ContentController extends Controller
         }
 
     }
+
+    public function deleteContent($id) {
+
+        $deletedItem = Content::where('id', $id )->delete();
+
+        if($deletedItem){
+            return back()->with('success', 'Item has been successfully deleted');
+        }
+
+    }
+
 }
