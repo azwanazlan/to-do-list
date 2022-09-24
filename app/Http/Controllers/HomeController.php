@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Content;
+use App\Models\User;
+use Auth;
+use DB;
 
 class HomeController extends Controller
 {
@@ -22,7 +26,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
+
     {
-        return view('home');
+
+
+        $data = Content::where('user_id', Auth::id())->get();
+       //$data = DB::table('contents')->where('user_id', Auth::id())->get();
+        return view('home', ['contents' => $data]);
+
+
+
     }
 }
