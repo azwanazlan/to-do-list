@@ -56,97 +56,25 @@
                                 @foreach ($contents as $content)
                                     <tr>
                                         <th scope="row">{{ $i++ }}</th>
-
-
-                                        <td class="col-md-8 hide-{{ $loop->index }}">
+                                        <td class="col-md-8">
                                             {{ $content->content }}</td>
-
-                                        <!---- Edit ----->
-
-                                        <td class="col-md-12 showHide-{{ $loop->index }}" style="display: none">
-                                            <input type="text" name="contentUpdate" id="content" class="form-control"
-                                                value="{{ old('content', $content->content) }}">
-                                        </td>
-
                                         <td>
-
-                                            <div  class="hide-{{ $loop->index }}"
-                                                style="display: block">
-                                                <a id="editBtn-{{ $loop->index }}" href="{{url('edit/'.$content->id) }}"
-                                                    data-id="{{ $loop->index }}" class="btn btn-success">Edit</a>
-
-                                                <a data-id="contentItem-{{ $loop->index }}"
-                                                    href="{{ url('delete/' . $content->id) }}"
-                                                    class="btn btn-danger">Delete</a>
-                                            </div>
-
-                                            <a class="btn btn-primary showHide-{{ $loop->index }}" type="submit"
-                                                style="display: none" href=>Confirm
-                                                Edit</a>
+                                            <a href="{{ url('edit/' . $content->id) }}" class="btn btn-success">Edit</a>
+                                            <a href="{{ url('delete/' . $content->id) }}" class="btn btn-danger">Delete</a>
                                         </td>
-
                                     </tr>
                                 @endforeach
 
                             </tbody>
                         </table>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ...
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" onclick="edit{{$content->id}}">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
                     </div>
 
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script>
-
-
-            function show(id) {
-                $.get("{{ url('edit') }}/" + id, {}, function(data, status) {
-                    $("#exampleModalLabel").html('Edit')
-                    $("#page").html(data);
-                    $("#exampleModal").modal('show');
-                });
-            }
-
-            // function myFunction(e) {
-
-            //     var a = e.getAttribute('data-id');
-
-            //     console.log(a);
-
-            //     [].forEach.call(document.querySelectorAll(".hide-" + a), function(
-            //         el) { //loop each class that have .hide-a to hide the class
-            //         el.style.display = 'none';
-            //     });
-            //     [].forEach.call(document.querySelectorAll(".showHide-" + a), function(
-            //         el) { //loop each class that have .hide-a to show the class
-            //         el.style.display = 'block';
-            //     });
-
-            // }
-        </script>
     </div>
     </div>
 @endsection
