@@ -19,12 +19,15 @@
                         <form action="{{ route('add') }}" autocomplete="off" id="addItem" name="addItem" method="post">
                             @csrf
                             <label for="task" class="col-control-label mb-2">Task</label>
-                            <input type="text" name="content" id="content" class="form-control mb-2">
-                            <span style="color:red">
-                                @error('content')
-                                    {{ $message }}
-                                @enderror
-                            </span>
+                            <input type="text" name="task" id="content" class="form-control mb-2">
+                            <div>
+                                <span style="color:red">
+                                    @error('task')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                            </div>
+
                             <button type="submit" class="btn btn-primary mt-2 ">+ Add</button>
                         </form>
 

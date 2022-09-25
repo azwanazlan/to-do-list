@@ -12,11 +12,11 @@ class ContentController extends Controller
     public function addContent(Request $request)
     {
         $this->validate($request, [
-            'content' => 'required',
+            'task' => 'required',
         ]);
 
         $content = new Content;
-        $content->content = $request->content;
+        $content->content = $request->task;
         $content->user_id = Auth::id();
         $item = $content->save();
 
@@ -43,8 +43,12 @@ class ContentController extends Controller
 
     public function updateContent(Request $request, $id)
     {
+        $this->validate($request, [
+            'task' => 'required',
+        ]);
+
         $content = Content::findOrFail($id);
-        $content->content = $request->content;
+        $content->content = $request->task;
         $updatedItem = $content->save();
 
         if ($updatedItem) {
