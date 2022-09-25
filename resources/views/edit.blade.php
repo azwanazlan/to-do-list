@@ -13,7 +13,7 @@
 
                 <!--- Add New Item Card --->
                 <div class="card">
-                    <div class="card-header">ADD NEW ITEM</div>
+                    <div class="card-header">EDIT</div>
                     <div class="form-group m-4">
 
                         <form action="{{ url('update/'.$editItem->id)}}" autocomplete="off" id="addItem" name="addItem" method="post">
