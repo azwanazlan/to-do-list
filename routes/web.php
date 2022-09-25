@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContentController;
-use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 
 /*

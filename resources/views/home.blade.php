@@ -15,7 +15,6 @@
                 <div class="card">
                     <div class="card-header">ADD NEW ITEM</div>
                     <div class="form-group m-4">
-
                         <form action="{{ route('add') }}" autocomplete="off" id="addItem" name="addItem" method="post">
                             @csrf
                             <label for="task" class="col-control-label mb-2">Task</label>
@@ -27,12 +26,12 @@
                                     @enderror
                                 </span>
                             </div>
-
                             <button type="submit" class="btn btn-primary mt-2 ">+ Add</button>
                         </form>
 
                     </div>
                 </div>
+                <!--- Add New Item Card Ends Here --->
             </div>
         </div>
 
@@ -41,8 +40,6 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">TO DO LIST</div>
-
-
                     <div class="card-body">
                         <table class="table mb-4">
                             <thead>
@@ -67,17 +64,14 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
-
-
-
                     </div>
 
                 </div>
             </div>
         </div>
+        <!--- To Do List Card Ends Here --->
     </div>
     </div>
 @endsection
