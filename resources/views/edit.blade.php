@@ -1,12 +1,3 @@
-{{-- <div class="p2">
-    <div class="form-group">
-        <input type="text" class="form-control" name="content" value="{{ $data->name }}"id="content" placeholder="">
-    </div>
-    <div class="form-group mt-2">
-        <button class="btn btn-success" onclick="#">Update</button>
-    </div>
-</div> --}}
-
 @extends('layouts.app')
 
 @section('content')

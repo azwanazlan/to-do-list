@@ -24,12 +24,6 @@ class ContentController extends Controller
             return back()->with('success', 'Item has been successfully added');
         }
     }
-    // public function showEdit($id)
-    // {
-
-    //     $data = Content::findOrFail($id);
-    //     return view('edit')->with(['data' => $data]);
-    // }
 
     public function deleteContent($id)
     {
