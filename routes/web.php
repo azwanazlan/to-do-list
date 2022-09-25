@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContentController;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -16,24 +17,20 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::controller(ContentController::class)->group(function () {
+    Route::get('/', 'home')->name('/');
+    Route::get('/home', 'index')->name('home');
+});
 
-Route::post('/add', [ContentController::class, 'addContent'])->name('add');
-
-Route::get('delete/{id}', [ContentController::class, 'deleteContent'])->name('delete');
-
-Route::get('edit/{id}', [ContentController::class, 'editContent'])->name('edit');
-
-Route::post('update/{id}', [ContentController::class, 'updateContent'])->name('update');
-
-
-
+Route::controller(ContentController::class)->group(function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::post('/add', 'addContent')->name('add');
+        Route::get('delete/{id}', 'deleteContent')->name('delete');
+        Route::get('edit/{id}', 'editContent')->name('edit');
+        Route::post('update/{id}', 'updateContent')->name('update');
+    });
+});

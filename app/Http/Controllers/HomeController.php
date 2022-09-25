@@ -25,16 +25,18 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
 
+    public function home()
     {
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
+    }
 
-
+    public function index()
+    {
         $data = Content::where('user_id', Auth::id())->get();
-       //$data = DB::table('contents')->where('user_id', Auth::id())->get();
+        //$data = DB::table('contents')->where('user_id', Auth::id())->get();
         return view('home', ['contents' => $data]);
-
-
-
     }
 }
