@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::controller(ContentController::class)->group(function () {
-    Route::get('/', 'home')->name('/');
-    Route::get('/home', 'index')->name('home');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/','home')->name('/');
+    Route::get('/home','index')->name('home');
 });
 
 Route::controller(ContentController::class)->group(function () {
