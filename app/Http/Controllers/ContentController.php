@@ -18,11 +18,9 @@ class ContentController extends Controller
         $content = new Content;
         $content->content = $request->task;
         $content->user_id = Auth::id();
-        $item = $content->save();
+        $content->save();
 
-        if ($item) {
-            return back()->with('success', 'Item has been successfully added');
-        }
+
 
     }
 

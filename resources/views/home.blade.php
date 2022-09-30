@@ -5,20 +5,20 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                @if (Session::get('success'))
+                {{-- @if (Session::get('success'))
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
                     </div>
-                @endif
+                @endif --}}
 
                 <!--- Add New Item Card --->
                 <div class="card">
                     <div class="card-header">ADD NEW ITEM</div>
                     <div class="form-group m-4">
-                        <form action="{{ route('add') }}" autocomplete="off" id="addItem" name="addItem" method="post">
-                            @csrf
+
+
                             <label for="task" class="col-control-label mb-2">Task</label>
-                            <input type="text" name="task" id="content" class="form-control mb-2">
+                            <input type="text" name="task" id="task" class="form-control mb-2">
                             <div>
                                 <span style="color:red">
                                     @error('task')
@@ -26,9 +26,9 @@
                                     @enderror
                                 </span>
                             </div>
-                            <button type="submit" class="btn btn-primary mt-2 ">+ Add</button>
+                            <button onclick="create()" class="btn btn-primary mt-2 ">+ Add</button>
 
-                        </form>
+
 
                     </div>
                 </div>
@@ -77,6 +77,24 @@
                 read();
             });
 
+            function create() {
+                var name = $("#task").val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'post',
+                    url: "{{ url('add') }}",
+                    data: "task=" + name,
+                    success: function(data) {
+                        $("#exampleModal").modal('hide');
+                        read();
+                    }
+                });
+            }
             function showDelete(id) {
                 $.get("{{ url('showDelete') }}/" + id, {}, function(data, status) {
                     $(".modal-title").html('Delete');
