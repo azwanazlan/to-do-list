@@ -39,4 +39,15 @@ class HomeController extends Controller
         //$data = DB::table('contents')->where('user_id', Auth::id())->get();
         return view('home', ['contents' => $data]);
     }
-}
+
+    public function read()
+    {
+        $data = Content::all();
+        //$data = DB::table('contents')->where('user_id', Auth::id())->get();
+        return view('read', ['contents' => $data]);
+
+
+    }
+    }
+
+

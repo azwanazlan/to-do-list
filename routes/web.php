@@ -23,13 +23,15 @@ Auth::routes();
 Route::controller(HomeController::class)->group(function () {
     Route::get('/','home')->name('/');
     Route::get('/home','index')->name('home');
+    Route::get('/read','read')->name('read');
 });
 
 Route::controller(ContentController::class)->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::post('/add', 'addContent')->name('add');
         Route::get('delete/{id}', 'deleteContent')->name('delete');
+        Route::get('showDelete/{id}', 'showDeleteContent')->name('showDelete');
         Route::get('edit/{id}', 'editContent')->name('edit');
-        Route::post('update/{id}', 'updateContent')->name('update');
+        Route::put('update/{id}', 'updateContent')->name('update');
     });
 });

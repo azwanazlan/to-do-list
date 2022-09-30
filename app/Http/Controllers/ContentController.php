@@ -23,36 +23,43 @@ class ContentController extends Controller
         if ($item) {
             return back()->with('success', 'Item has been successfully added');
         }
+
     }
+
+    public function showDeleteContent($id)
+    {
+
+        $deleteContent = Content::find($id);
+        return view('delete', ['deleteItem' => $deleteContent]);
+    }
+
+        // if ($deletedItem) {
+        //     return back()->with('success', 'Item has been successfully updated');
+        // }
+
+
 
     public function deleteContent($id)
     {
 
-        $deletedItem = Content::where('id', $id)->delete();
+        $deletedItem = Content::find($id);
+        $deletedItem->delete();
+        // if ($deletedItem) {
+        //     return back()->with('success', 'Item has been successfully updated');
+        // }
 
-        if ($deletedItem) {
-            return back()->with('success', 'Item has been successfully updated');
-        }
     }
 
     public function editContent($id)
     {
-        $editItem = Content::find($id);;
+        $editItem = Content::find($id);
         return view('edit', ['editItem' => $editItem]);
     }
 
     public function updateContent(Request $request, $id)
     {
-        $this->validate($request, [
-            'task' => 'required',
-        ]);
-
         $content = Content::findOrFail($id);
         $content->content = $request->task;
-        $updatedItem = $content->save();
-
-        if ($updatedItem) {
-            return back()->with('success', 'Item has been successfully updated');
-        }
+        $content->save();
     }
 }
