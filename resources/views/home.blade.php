@@ -40,41 +40,8 @@
         <div class="row justify-content-center mt-4">
             <div class="col-md-8">
 
-                <div id="read" class="card">
-
-                    <div class="card-header">TO DO LIST</div>
-                    <div class="card-body">
-                        <table class="table mb-4">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Todo item</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $i = 1;
-                                @endphp
-                                @foreach ($contents as $content)
-                                    <tr>
-                                        <th scope="row">{{ $i++ }}</th>
-                                        <td class="col-md-8">
-                                            {{ $content->content }}</td>
-                                        <td>
-                                            <button onclick="edit({{ $content->id }})"
-                                                class="btn btn-success">Edit</button>
-                                            <button onclick="showDelete({{ $content->id }})"
-                                                class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
+                <div class="card">
+                    <div id="read"></div>
                 </div>
 
 
@@ -106,7 +73,9 @@
 
 
         <script>
-
+            $(document).ready(function() {
+                read();
+            });
 
             function showDelete(id) {
                 $.get("{{ url('showDelete') }}/" + id, {}, function(data, status) {
@@ -131,9 +100,9 @@
                 });
             }
 
+
+
             function update(id) {
-
-
                 var name = $("#editItem").val();
                 $.ajaxSetup({
                     headers: {
@@ -146,15 +115,33 @@
                     url: "{{ url('update') }}/" + id,
                     data: "task=" + name,
                     success: function(data) {
-
-
                         $("#exampleModal").modal('hide');
                         read();
-
                     }
-
                 });
             }
+
+            function destroy(id) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'get',
+                    url: "{{ url('delete') }}/" + id,
+                    data: id,
+                    success: function(data) {
+                        $("#exampleModal").modal('hide');
+                        read();
+                    }
+                });
+            }
+
+
+
+
         </script>
     </div>
     </div>

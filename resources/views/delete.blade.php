@@ -1,5 +1,4 @@
-<div id="page" class="form-group">
-
+<div class="form-group">
 
     <div>Are you sure to delete this task?</div>
     <button type="button" onclick="delete({{ $delete->id }})" class="btn btn-primary mt-4">Delete</button>

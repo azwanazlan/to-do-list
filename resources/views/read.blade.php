@@ -20,7 +20,7 @@
                             {{ $content->content }}</td>
                         <td>
                             <button onclick="edit({{ $content->id }})" class="btn btn-success">Edit</button>
-                            <button onclick="showDelete({{ $content->id }})" class="btn btn-danger">Delete</button>
+                            <button onclick="destroy({{ $content->id }})" class="btn btn-danger">Delete</button>
                         </td>
                     </tr>
                 @endforeach
