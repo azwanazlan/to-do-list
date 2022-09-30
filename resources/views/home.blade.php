@@ -41,6 +41,7 @@
             <div class="col-md-8">
 
                 <div id="read" class="card">
+
                     <div class="card-header">TO DO LIST</div>
                     <div class="card-body">
                         <table class="table mb-4">
@@ -61,15 +62,18 @@
                                         <td class="col-md-8">
                                             {{ $content->content }}</td>
                                         <td>
-                                            <button class="btn btn-success"
-                                                onclick="edit({{ $content->id }})">Edit</button>
-                                            <a href="{{ url('delete/' . $content->id) }}" class="btn btn-danger">Delete</a>
+                                            <button onclick="edit({{ $content->id }})"
+                                                class="btn btn-success">Edit</button>
+                                            <button onclick="showDelete({{ $content->id }})"
+                                                class="btn btn-danger">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
+
+
 
                 </div>
 
@@ -102,6 +106,8 @@
 
 
         <script>
+
+
             function showDelete(id) {
                 $.get("{{ url('showDelete') }}/" + id, {}, function(data, status) {
                     $(".modal-title").html('Delete');
