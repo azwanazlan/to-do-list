@@ -33,5 +33,7 @@ Route::controller(ContentController::class)->group(function () {
         Route::get('showDelete/{id}', 'showDeleteContent')->name('showDelete');
         Route::get('edit/{id}', 'editContent')->name('edit');
         Route::put('update/{id}', 'updateContent')->name('update');
+        Route::get('markascompleted/{id}', 'markAsCompleted')->name('mark');
+
     });
 });

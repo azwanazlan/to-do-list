@@ -60,4 +60,11 @@ class ContentController extends Controller
         $content->content = $request->task;
         $content->save();
     }
+
+    public function markAsCompleted($id)
+    {
+        $content = Content::findOrFail($id);
+        $content->completed = true;
+        $content->save();
+    }
 }

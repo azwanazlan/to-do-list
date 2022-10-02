@@ -17,18 +17,18 @@
                     <div class="form-group m-4">
 
 
-                            <label for="task" class="col-control-label mb-2">Task</label>
-                            <input type="text" name="task" id="task" class="form-control mb-2">
-                            <div>
-                                <span style="color:red">
-                                    @error('task')
-                                        {{ $message }}
-                                    @enderror
-                                </span>
-                            </div>
-                            <button onclick="create()" class="btn btn-primary mt-2 ">+ Add</button>
-
-
+                        <label for="task" class="col-control-label mb-2">Task</label>
+                        <div class="input-group">
+                            <input type="text" autocomplete="off" name="task" id="task" class="form-control mb-2">
+                            <button onclick="create()" class="btn btn-primary btn-sm px-4 mb-2 "><i class="fa fa-plus"></i></button>
+                        </div>
+                        <div>
+                            <span style="color:red">
+                                @error('task')
+                                    {{ $message }}
+                                @enderror
+                            </span>
+                        </div>
 
                     </div>
                 </div>
@@ -95,6 +95,7 @@
                     }
                 });
             }
+
             function showDelete(id) {
                 $.get("{{ url('showDelete') }}/" + id, {}, function(data, status) {
                     $(".modal-title").html('Delete');
@@ -149,17 +150,28 @@
                 $.ajax({
                     type: 'get',
                     url: "{{ url('delete') }}/" + id,
-                    data: id,
+                    // data: id,
                     success: function(data) {
-                        $("#exampleModal").modal('hide');
                         read();
                     }
                 });
             }
 
+            function markAsCompleted(id) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-
-
+                $.ajax({
+                    type: 'get',
+                    url: "{{ url('markascompleted') }}/" + id,
+                    success: function(data) {
+                        read();
+                    }
+                });
+            }
         </script>
     </div>
     </div>

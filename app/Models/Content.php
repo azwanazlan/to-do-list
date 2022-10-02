@@ -12,7 +12,8 @@ class Content extends Model
     use HasFactory;
 
     protected $fillable = [
-                            'content'
+                            'content',
+                            'complete'
                         ];
     /**
      * Get all of the comments for the Content
