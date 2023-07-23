@@ -20,3 +20,11 @@
     opacity: 0;
 }
 
+.completed {
+    text-decoration: line-through; /* Add strike-through for completed tasks */
+}
+
+.completed .fa-check {
+    color: green; /* Color the tick icon green for completed tasks */
+}
+

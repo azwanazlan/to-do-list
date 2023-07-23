@@ -195,8 +195,8 @@
                     },
 
                     error: function(xhr, status, error) {
-                    console.log("AJAX Error:", error);
-        }
+                        console.log("AJAX Error:", error);
+                    }
                 });
             }
 
@@ -212,6 +212,9 @@
                     url: "{{ url('markascompleted') }}/" + id,
                     success: function(data) {
                         read();
+                        $("#task_" + id).addClass("completed");
+                        $("#task_" + id + " .fa-check").show();
+
                     }
                 });
             }

@@ -16,7 +16,8 @@
                 <tr>
                     <th scope="row">{{ $i++ }}</th>
                     <td class="col-md-8">
-                        {{ $content->content }}</td>
+                        {{ $content->content }}
+                    </td>
                     <td>
                         <button onclick="edit({{ $content->id }})" class="btn btn-success">Edit</button>
                         <div class="btn-group">
