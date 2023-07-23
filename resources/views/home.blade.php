@@ -5,12 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                {{-- @if (Session::get('success'))
-                    <div class="alert alert-success">
-                        {{ Session::get('success') }}
-                    </div>
-                @endif --}}
-
+                <div class="ajax-alert-container"></div>
                 <!--- Add New Item Card --->
                 <div class="card">
                     <div class="card-header">ADD NEW ITEM</div>
@@ -19,8 +14,10 @@
 
                         <label for="task" class="col-control-label mb-2">Task</label>
                         <div class="input-group">
-                            <input type="text" autocomplete="off" name="task" id="task" class="form-control mb-2">
-                            <button onclick="create()" class="btn btn-primary btn-sm px-4 mb-2 "><i class="fa fa-plus"></i></button>
+                            <input type="text" autocomplete="off" name="task" id="task"
+                                class="form-control mb-2">
+                            <button onclick="create()" class="btn btn-primary btn-sm px-4 mb-2 "><i
+                                    class="fa fa-plus"></i></button>
                         </div>
                         <div>
                             <span style="color:red">
@@ -67,11 +64,7 @@
         </div>
         <!--- Modal Ends Here --->
 
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-
-
         <script>
             $(document).ready(function() {
                 read();
@@ -92,6 +85,17 @@
                     success: function(data) {
                         $("#exampleModal").modal('hide');
                         read();
+
+                        $(".ajax-alert-container").prepend('<div class="alert alert-success">' + data.message +
+                            '</div>');
+                        // Hide the alert after 5 seconds with fade effect
+                        setTimeout(function() {
+                            $(".ajax-alert-container .alert").addClass("hide");
+                            setTimeout(function() {
+                                $(".ajax-alert-container .alert").remove();
+                            }, 500);
+                        }, 5000);
+
                     }
                 });
             }
@@ -101,6 +105,18 @@
                     $(".modal-title").html('Delete');
                     $("#page").html(data);
                     $("#exampleModal").modal('show');
+
+                    if (data.message) {
+                        $(".ajax-alert-container").prepend('<div class="alert alert-success">' + data.message +
+                            '</div>');
+                        // Hide the alert after 5 seconds with fade effect
+                        setTimeout(function() {
+                            $(".ajax-alert-container .alert").addClass("hide");
+                            setTimeout(function() {
+                                $(".ajax-alert-container .alert").remove();
+                            }, 500);
+                        }, 5000);
+                    }
                 });
             }
 
@@ -136,6 +152,17 @@
                     success: function(data) {
                         $("#exampleModal").modal('hide');
                         read();
+                        if (data.message) {
+                            $(".ajax-alert-container").prepend('<div class="alert alert-success">' + data.message +
+                                '</div>');
+                            // Hide the alert after 5 seconds with fade effect
+                            setTimeout(function() {
+                                $(".ajax-alert-container .alert").addClass("hide");
+                                setTimeout(function() {
+                                    $(".ajax-alert-container .alert").remove();
+                                }, 500);
+                            }, 5000);
+                        }
                     }
                 });
             }
@@ -153,7 +180,23 @@
                     // data: id,
                     success: function(data) {
                         read();
-                    }
+                        if (data.message) {
+                            $(".ajax-alert-container").prepend('<div class="alert alert-success">' + data.message +
+                                '</div>');
+                            // Hide the alert after 5 seconds with fade effect
+                            setTimeout(function() {
+                                $(".ajax-alert-container .alert").addClass("hide");
+                                setTimeout(function() {
+                                    $(".ajax-alert-container .alert").remove();
+                                }, 500);
+                            }, 5000);
+                        }
+
+                    },
+
+                    error: function(xhr, status, error) {
+                    console.log("AJAX Error:", error);
+        }
                 });
             }
 
